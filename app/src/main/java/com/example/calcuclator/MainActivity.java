@@ -6,9 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.TextView;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvPhuongthuc, tvKetqua;
     public ArrayList<String> arrOperation;
     public ArrayList<Double> arrNumber;
-    private ResultViewModel viewmodel;
+    private ResultViewModel viewModel;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setOnClickListener(this);
         }
 
-        viewmodel = ViewModelProviders.of(this).get(ResultViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
 
-        viewmodel.getResult().observe(this, new Observer<Double>() {
+        viewModel.getResult().observe(this, new Observer<Double>() {
             @Override
             public void onChanged(@Nullable Double aDouble) {
                 tvKetqua.setText(df.format(aDouble) + "");
@@ -46,14 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         });
-        viewmodel.getPhuongthuc().observe(this, new Observer<String>() {
+        viewModel.getPhuongthuc().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String aString) {
                 tvPhuongthuc.setText(aString);
 
             }
-
-
         });
 
 
@@ -181,15 +177,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 // tvKetqua.setText(df.format(result) + "");
                 // final double finalResult = result;
-                viewmodel.giatriresult(result);
-                viewmodel.phuongthuc(display);
+                viewModel.giatriresult(result);
+                viewModel.phuongthuc(display);
 
             default:
                 break;
 
         }
     }
-
     public int addOperation(String input) {
         arrOperation = new ArrayList<>();
 
